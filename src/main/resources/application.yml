@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/securityDemo?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+
+    druid:
+      aop-patterns: com.scrh.shirodemo #aop监控，com.scrh.shirodemo为项目的总包
+
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+        reset-enable: false #重置按钮是否开启
+
+      web-stat-filter:
+        enabled: true
+        url-pattern: '/*'
+        exclusions: '*.js,*.git,*.jpg,*.png,*.css,*.ico,/druid/*'
+
+      filters: stat,wall,slf4j #设置stat,wall功能的开启
+      filter:
+        stat:
+          slow-sql-millis: 1000 #设置缓慢查询的时间范围
+          log-slow-sql: true #记录缓慢查询日志n
+          #enabled: true #这里可以设置单个功能的开启，上面filters里可以设置多个功能的开启
+        wall:
+          #enabled: true
+          config:
+            update-allow: true #防火墙允许对数据库数据进行更新操作，默认为true，为false则会拦截所有更新操作
+  thymeleaf:
+    cache: false #关闭Thymeleaf的缓存
+
+
+logging:
+  level:
+    com.scrh.shirodemo.mapper: trace
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true #开启mybatis的驼峰命名法识别

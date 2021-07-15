@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录页面</title>
+</head>
+<body>
+<h1>登录页面</h1>
+<hr>
+<form th:action="@{/login}" th:method="post">
+  <p>
+    用户名： <input type="text" name="username">
+  </p>
+  <p>
+    密码： <input type="password" name="password">
+  </p>
+  <p>
+    <input type="checkbox" name="rememberMe"> &nbsp;记住我
+  </p>
+  <p style="color:red;" th:text="${msg}"></p>
+  <p>
+    <input type="submit" value="登录">
+  </p>
+</form>
+<script>
+  //当session中已经存在用户登录过的信息时，跳转到首页
+  //已经使用拦截器进行实现，所以注释掉了以下代码
+  // hasUserSession()
+  // function hasUserSession(){
+  //   let user = sessionStorage.getItem("user")
+  //   if (String(user.password).length === 32){
+  //     window.location.href='/'
+  //   }
+  // }
+</script>
+</body>
+</html>

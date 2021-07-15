@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<p shiro:guest="">
+    <a th:href="@{/toLogin}">登录</a>
+</p>
+<p th:if="${session.user!=null}" th:text="${session.user.getUsername()}"></p>
+<p shiro:user="" ><a th:href="@{/logout}">注销登录</a></p>
+<hr >
+<p shiro:hasPermission="user:add" ><a th:href="@{/user/add}">Add</a></p>
+<hr>
+
+<hr >
+<p shiro:hasPermission="user:update"><a th:href="@{/user/update}">Update</a></p>
+</body>
+</html>
