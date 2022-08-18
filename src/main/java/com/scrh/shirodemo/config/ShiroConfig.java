@@ -23,7 +23,7 @@ public class ShiroConfig extends ShiroConfiguration {
 
     //ShiroFilterFactoryBean
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(@PathVariable(name = "getDefaultWebSecurityManager")DefaultWebSecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(@PathVariable(name = "defaultWebSecurityManager")DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -54,7 +54,7 @@ public class ShiroConfig extends ShiroConfiguration {
         return shiroFilterFactoryBean;
     }
     //DefaultWebSecurityManager
-    @Bean(name = "getDefaultWebSecurityManager")
+    @Bean(name = "defaultWebSecurityManager")
     public DefaultWebSecurityManager getDefaultWebSecurityManager(@PathVariable(name = "userRealm")UserRealm userRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //设置自定义的shiroRealm
@@ -120,6 +120,7 @@ public class ShiroConfig extends ShiroConfiguration {
     }
 
     //移除自带的jsessionid，防止第二次打开浏览器时进行注销操作发生jsessionid不同的异常
+    @Override
     @Bean
     public DefaultSessionManager sessionManager(){
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();

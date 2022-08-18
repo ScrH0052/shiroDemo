@@ -2,6 +2,7 @@ package com.scrh.shirodemo.config;
 
 import com.scrh.shirodemo.pojo.User;
 import com.scrh.shirodemo.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -12,7 +13,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
-
+@Slf4j
 public class UserRealm extends AuthorizingRealm {
     //声明用户服务层
     @Resource
@@ -22,7 +23,7 @@ public class UserRealm extends AuthorizingRealm {
     //执行授权逻辑
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        System.out.println("执行了=>授权逻辑PrincipalCollection");
+        log.info("执行了=>授权逻辑PrincipalCollection");
         //对用户进行资源访问授权
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //获取当前登录的用户
@@ -36,7 +37,7 @@ public class UserRealm extends AuthorizingRealm {
     //执行认证逻辑
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        System.out.println("执行了=>认证逻辑AuthenticationToken");
+        log.info("执行了=>认证逻辑AuthenticationToken");
         /*无数据库版
         //假设数据库的用户名和密码
         String name = "root";
